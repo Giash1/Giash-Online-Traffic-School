@@ -115,8 +115,7 @@ Giash-Online-Traffic-School/
 └── package.json
 
 🗂 Trello Board Workflow
-
-Your Trello board can follow this simple development pipeline:
+A Trello board is followed this simple development pipeline:
 
 Columns
 
