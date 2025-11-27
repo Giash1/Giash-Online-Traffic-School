@@ -9,7 +9,7 @@ function App() {
           Swedish Traffic Theory Learning Platform
         </p>
         <p className="text-lg text-gray-600 mt-4">
-          Svenska | English | বাংলা
+          English | Swedish | বাংলা
         </p>
       </div>
     </div>
