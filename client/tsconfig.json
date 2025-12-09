@@ -20,5 +20,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
-  "references": [{ "path": "./client/tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

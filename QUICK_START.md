@@ -432,19 +432,27 @@ VITE_APP_NAME=Giash Traffic School
 
 ## Step 4: Create Basic Folder Structure
 
+### 4.1 Server Structure
+
 ```powershell
-# In server folder
-cd ../server
+# Navigate to server folder
+cd server
+
+# Create src folder and subfolders
 mkdir src
 cd src
-mkdir config controllers models routes middleware utils
-cd ..
+mkdir config, controllers, models, routes, middleware, utils
+```
 
-# In client folder
-cd ../client/src
-mkdir components pages context hooks services types utils
-mkdir components/common components/quiz components/lessons components/auth
-cd ../..
+### 4.2 Client Structure
+
+```powershell
+# Navigate to client src folder
+cd ../../client/src
+
+# Create subfolders
+mkdir components, pages, context, hooks, services, types, utils
+mkdir components/common, components/quiz, components/lessons, components/auth
 ```
 
 ---
@@ -500,6 +508,7 @@ npm start
 Browser will open at `http://localhost:3000`
 
 ---
+****will start from here
 
 ## Step 7: Test the Setup
 
