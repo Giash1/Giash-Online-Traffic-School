@@ -17,6 +17,20 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+// Health check route
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'OK',
+    message: 'Server is running'
+  });
+});
+//registration route
+app.post('/api/register', (req, res) => {
+  res.json({
+    status: 'Success',
+    message: 'User registered successfully'
+  });
+});
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

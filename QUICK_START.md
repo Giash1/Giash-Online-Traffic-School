@@ -1,4 +1,9 @@
 # Quick Start Guide - Swedish Traffic School
+cd .\client
+npm run dev (for browser)
+
+cd .\server
+pm run dev (for backend)
 
 ## 🚀 Get Started in 5 Minutes
 
@@ -508,7 +513,7 @@ npm start
 Browser will open at `http://localhost:3000`
 
 ---
-****will start from here
+
 
 ## Step 7: Test the Setup
 
