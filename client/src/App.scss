@@ -1,0 +1,491 @@
+/* ================================================
+   HOME PAGE STYLING
+   ================================================ */
+
+// --- Main Content Area ---
+.main-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .welcome-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .welcome-subheading {
+    font-size: 1.2rem;
+    color: #e5e7eb; // A light gray
+    margin-bottom: 2.5rem;
+  }
+}
+
+// --- Features Grid ---
+.features-grid {
+  display: grid;
+  gap: 2rem;
+  max-width: 1024px;
+
+  // On medium screens and up, show 2 columns
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .feature-card {
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.9); // White with 90% opacity
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #2563eb; // A nice blue color
+    }
+
+    .feature-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #4b5563; // A medium gray
+    }
+  }
+}
+
+/* ================================================
+   NAVIGATION COMPONENT STYLING
+   ================================================ */
+
+// --- TopNav Component ---
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+
+  &.light {
+    background-color: white;
+    color: #374151;
+  }
+
+  &.dark {
+    background-color: #1f2937;
+    color: white;
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid;
+
+    &.light {
+      border-color: #e5e7eb;
+    }
+
+    &.dark {
+      border-color: #374151;
+    }
+
+    .logo-container {
+      flex-shrink: 0;
+      width: 3rem;
+      display: flex;
+      justify-content: center;
+
+      .logo {
+        height: 40px;
+        width: 40px;
+        object-fit: contain;
+      }
+    }
+
+    .title-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 0 0.5rem;
+
+      .school-title {
+        font-size: 1.125rem;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+
+        @media (min-width: 640px) {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      .language-selector {
+        position: relative;
+
+        .language-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+          padding: 0.375rem 0.5rem;
+          border: 1px solid;
+          border-radius: 0.375rem;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.2s;
+          font-size: 0.875rem;
+          font-weight: 500;
+
+          &.light {
+            border-color: #d1d5db;
+            color: #374151;
+
+            &:hover {
+              background-color: #f3f4f6;
+              border-color: #9ca3af;
+            }
+          }
+
+          &.dark {
+            border-color: #4b5563;
+            color: #d1d5db;
+
+            &:hover {
+              background-color: #374151;
+              border-color: #6b7280;
+            }
+          }
+
+          .language-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+          }
+
+          .chevron {
+            transition: transform 0.2s;
+
+            &.rotated {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .language-dropdown {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          margin-top: 0.25rem;
+          min-width: 160px;
+          border-radius: 0.5rem;
+          box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+          border: 1px solid;
+          z-index: 50;
+
+          &.light {
+            background-color: white;
+            border-color: #e5e7eb;
+          }
+
+          &.dark {
+            background-color: #1f2937;
+            border-color: #374151;
+          }
+
+          .language-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-align: left;
+            font-size: 0.875rem;
+
+            &:first-child {
+              border-top-left-radius: 0.5rem;
+              border-top-right-radius: 0.5rem;
+            }
+
+            &:last-child {
+              border-bottom-left-radius: 0.5rem;
+              border-bottom-right-radius: 0.5rem;
+            }
+
+            &.light {
+              color: #374151;
+
+              &:hover {
+                background-color: #f3f4f6;
+              }
+
+              &.active {
+                background-color: #dbeafe;
+                color: #1d4ed8;
+              }
+            }
+
+            &.dark {
+              color: #d1d5db;
+
+              &:hover {
+                background-color: #374151;
+              }
+
+              &.active {
+                background-color: #1e3a8a;
+                color: #93c5fd;
+              }
+            }
+
+            .flag {
+              font-size: 1rem;
+            }
+
+            .lang-name {
+              flex: 1;
+              font-weight: 500;
+            }
+
+            .lang-code {
+              font-size: 0.75rem;
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+
+      .logo-container {
+        flex-shrink: 0;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+
+        .logo {
+          height: 40px;
+          width: 40px;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+
+    &.light {
+      background-color: #f9fafb;
+    }
+
+    &.dark {
+      background-color: #111827;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        text-decoration: none;
+        color: inherit;
+
+        &.light:hover {
+          background-color: #e5e7eb;
+        }
+
+        &.dark:hover {
+          background-color: #374151;
+        }
+
+        .nav-text {
+          @media (max-width: 767px) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      padding-left: 1rem;
+
+      @media (min-width: 640px) {
+        gap: 0.75rem;
+      }
+
+      .theme-toggle {
+        padding: 0.5rem;
+        border-radius: 9999px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &.light:hover {
+          background-color: #e5e7eb;
+        }
+
+        &.dark:hover {
+          background-color: #374151;
+        }
+      }
+
+      .register-buy-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        background-color: #2563eb;
+        color: white;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        font-size: 0.875rem;
+        font-weight: 500;
+
+        &:hover {
+          background-color: #1d4ed8;
+        }
+      }
+
+      .login-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid;
+        border-radius: 0.375rem;
+        background: transparent;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: inherit;
+
+        &.light {
+          border-color: #d1d5db;
+
+          &:hover {
+            background-color: #f3f4f6;
+          }
+        }
+
+        &.dark {
+          border-color: #4b5563;
+
+          &:hover {
+            background-color: #1f2937;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ================================================
+   DASHBOARD PAGE STYLING
+   ================================================ */
+
+// Add dashboard specific styles here when needed
+
+/* ================================================
+   IQ QUESTIONS PAGE STYLING  
+   ================================================ */
+
+// Add IQ questions page styles here when needed
+
+/* ================================================
+   THEORY LESSONS PAGE STYLING
+   ================================================ */
+
+// Add theory lessons page styles here when needed
+
+/* ================================================
+   TRAFFIC SIGNS PAGE STYLING
+   ================================================ */
+
+// Add traffic signs page styles here when needed
+
+/* ================================================
+   PRACTICE TESTS PAGE STYLING
+   ================================================ */
+
+// Add practice tests page styles here when needed
+
+/* ================================================
+   FINAL TEST PAGE STYLING
+   ================================================ */
+
+// Add final test page styles here when needed
+
+/* ================================================
+   RESULTS PAGE STYLING
+   ================================================ */
+
+// Add results page styles here when needed
+
+/* ================================================
+   AUTHENTICATION PAGES STYLING
+   ================================================ */
+
+// Add login/register page styles here when needed
+
+/* ================================================
+   MODAL COMPONENTS STYLING
+   ================================================ */
+
+// Add modal components styles here when needed
+
+/* ================================================
+   SHARED/COMMON COMPONENTS STYLING
+   ================================================ */
+
+// Add shared component styles here when needed
+
+/* ================================================
+   RESPONSIVE BREAKPOINTS & UTILITIES
+   ================================================ */
+
+// Add responsive utilities and breakpoint styles here when needed

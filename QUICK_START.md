@@ -552,6 +552,280 @@ You can use Postman or create a simple registration form:
 
 ---
 
+## Step 9: UI/UX Design & Layout Structure
+
+### 🖥️ Overall Application Layout
+
+```
+┌────────────────────────────────────────────┐
+│         TOP NAVIGATION BAR (Sticky)        │
+├─────────────┬──────────────────────────────┤
+│             │                              │
+│  SIDEBAR    │    MAIN CONTENT AREA        │
+│   MENU      │    (Dynamic Pages)          │
+│             │                              │
+│             │                              │
+└─────────────┴──────────────────────────────┘
+│              FOOTER (Minimal)               │
+└────────────────────────────────────────────┘
+```
+
+---
+
+### 🔹 Step 9.1: Top Navigation Bar (Sticky Header)
+
+**Features:**
+- Logo/Branding (Left)
+- Progress Bar (Center) - "Lesson 3 of 10"
+- Notifications 🔔, Profile 👤, Dark/Light Mode 🌙 (Right)
+
+**Implementation:**
+```powershell
+# Create TopNav component
+cd client/src/components/common
+New-Item -Path TopNav.tsx -ItemType File
+```
+
+**Responsibilities:**
+- Display user profile
+- Show learning progress
+- Toggle theme
+- Notification center
+
+---
+
+### 🔹 Step 9.2: Left Sidebar Navigation
+
+**Menu Items:**
+- 📘 Dashboard
+- 🧠 IQ Questions
+- 📖 Theory Lessons
+- 🚦 Traffic Signs
+- 📝 Practice Tests
+- 🏆 Final Test
+- 📊 Results & Certificates
+
+**Stats Box (Bottom):**
+- Accuracy: 78%
+- Tests Completed: 12
+- Ready for Exam: ✅ Yes
+
+**Implementation:**
+```powershell
+cd client/src/components/common
+New-Item -Path Sidebar.tsx -ItemType File
+```
+
+---
+
+### 🔹 Step 9.3: Main Content Area (Dynamic Pages)
+
+#### **Page 1: IQ Question Page**
+
+```
+┌─────────────────────────────────────┐
+│  🧠 IQ Question 5/20                │
+├─────────────────────────────────────┤
+│                                     │
+│  Question:                          │
+│  "If you see this sign while        │
+│   driving, what should you do?"    │
+│                                     │
+│  [ Image / Diagram ]                │
+│                                     │
+│  ☐ Slow down                        │
+│  ☐ Stop completely                  │
+│  ☐ Overtake carefully               │
+│  ☐ Ignore the sign                  │
+│                                     │
+│  [⏭ Next] [💡 Hint]                 │
+└─────────────────────────────────────┘
+```
+
+---
+
+#### **Page 2: Answer & Explanation (After Submit)**
+
+```
+┌─────────────────────────────────────┐
+│  ✅ CORRECT ANSWER                  │
+│  "Stop completely"                  │
+├─────────────────────────────────────┤
+│  Explanation:                       │
+│  This sign indicates mandatory      │
+│  stopping due to traffic control    │
+│  or danger ahead. Failing to stop   │
+│  may cause accidents or fines.      │
+│                                     │
+│  📌 Related Rule                    │
+│  📷 Similar Signs                   │
+│                                     │
+│  [⏭ Next Question]                  │
+└─────────────────────────────────────┘
+```
+
+---
+
+#### **Page 3: Theory Lesson Page**
+
+```
+┌─────────────────────────────────────┐
+│  Split Layout:                      │
+├──────────────┬──────────────────────┤
+│              │                      │
+│  Content     │  Sticky Panel        │
+│  (Scroll)    │  - Key Points        │
+│              │  - Common Mistakes   │
+│  📘 Lesson   │  - Mini Quiz (3 Q's) │
+│  Title       │                      │
+│              │                      │
+│  • Bullet    │                      │
+│    points    │                      │
+│  • Icons     │                      │
+│  • Diagrams  │                      │
+│              │                      │
+└──────────────┴──────────────────────┘
+```
+
+---
+
+#### **Page 4: Practice Test Mode**
+
+```
+┌──────────────────────────────────────┐
+│  ⏱ 28:45 | Question: 12 / 65 | 🚩   │
+├──────────────────────────────────────┤
+│  [Question with 4 options]           │
+│                                      │
+│  [Previous] [Next] [Submit Test]    │
+└──────────────────────────────────────┘
+```
+
+**Features:**
+- Countdown timer
+- Question counter
+- Flag for review later
+- Navigation buttons
+
+---
+
+#### **Page 5: Final Test (STRICT MODE)**
+
+```
+┌──────────────────────────────────────┐
+│  🚨 EXAM MODE - RULES               │
+│  ❌ No back navigation               │
+│  ⏱ Timed (90 min)                    │
+│  📌 One attempt only                 │
+│  💾 Auto-save answers               │
+├──────────────────────────────────────┤
+│  [Exam Questions]                    │
+│  [Submit Test Button - FINAL]        │
+└──────────────────────────────────────┘
+```
+
+---
+
+#### **Page 6: Test Results**
+
+```
+┌──────────────────────────────────────┐
+│  🎉 TEST COMPLETED                  │
+├──────────────────────────────────────┤
+│  Score: 52 / 65                      │
+│  Status: ✅ PASS                     │
+│                                      │
+│  [📥 Download Certificate]           │
+│  [🔍 Review Mistakes]                │
+│  [📊 View Analytics]                 │
+└──────────────────────────────────────┘
+```
+
+---
+
+### 🔹 Step 9.4: Results & Analytics Dashboard
+
+**Displays:**
+- 📊 Topic-wise accuracy (chart)
+- 📉 Weak areas (highlighted)
+- 📈 Progress over time
+- 📌 AI Recommendations: "Revise Traffic Signs – Priority Rules"
+
+---
+
+### 🔹 Step 9.5: Footer
+
+```
+© 2025 Giash Online Traffic School | Privacy | Terms | Contact
+```
+
+---
+
+### 🎨 Step 9.6: Design Style Guide
+
+#### **Color Palette**
+- **Primary**: Blue (#2563EB) - Trust, professionalism
+- **Success**: Green (#10B981) - Correct answers
+- **Error**: Red (#EF4444) - Wrong answers
+- **Warning**: Orange (#F59E0B) - Hints, notifications
+- **Background**: White (#FFFFFF) - Clean, minimal
+- **Text**: Dark Gray (#374151) - High readability
+
+#### **Typography**
+- **Headings**: Poppins or Inter (Bold, 24px-32px)
+- **Body Text**: Roboto (Regular, 14px-16px)
+- **Small Text**: Roboto (Light, 12px)
+
+#### **Spacing & Rounded Corners**
+- Card Border Radius: 12-16px
+- Padding: 16px (cards), 24px (pages)
+- Gap between elements: 8-12px
+
+#### **Animations**
+- Hover effects: 200ms ease-in-out
+- Progress bar: Smooth transitions
+- Page transitions: Fade in/out (300ms)
+- Button feedback: Scale (1.02) on hover
+
+---
+
+### 🏫 Step 9.7: Add School Logo
+
+**Logo Location:** `client/src/assets/logo.svg` or `logo.png`
+
+**Create folder:**
+```powershell
+cd client/src
+mkdir assets
+mkdir assets/images
+mkdir assets/icons
+```
+
+**Add Logo File:**
+1. Save your school logo as `logo.svg` or `logo.png`
+2. Place it in `client/src/assets/images/`
+3. Import in TopNav component:
+   ```typescript
+   import logo from '@/assets/images/logo.svg'
+   ```
+
+---
+
+### 📱 Step 9.8: Mobile Responsiveness
+
+**Breakpoints:**
+- Mobile: < 640px (Sidebar collapses to hamburger menu)
+- Tablet: 640px - 1024px (Sidebar toggleable)
+- Desktop: > 1024px (Full layout)
+
+**Mobile Changes:**
+- Stack layout (remove two-column)
+- Smaller fonts
+- Touch-friendly buttons (44px min height)
+- Hamburger menu for navigation
+
+---
+
 ## 📁 Your Project Structure Should Look Like:
 
 ```

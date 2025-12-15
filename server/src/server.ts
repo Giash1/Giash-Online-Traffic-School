@@ -25,11 +25,13 @@ app.get('/api/health', (req, res) => {
   });
 });
 //registration route
-app.post('/api/register', (req, res) => {
+app.post('/api/auth/register', (req, res) => {
   res.json({
-    status: 'Success',
-    message: 'User registered successfully'
-  });
+  "name": "Admin User",
+  "email": "admin@traffic.com",
+  "password": "admin123",
+  "preferredLanguage": "sv"
+});
 });
 // Start Server
 app.listen(PORT, () => {
