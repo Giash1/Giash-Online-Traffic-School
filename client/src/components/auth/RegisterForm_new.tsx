@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void;
   onClose: () => void;
   selectedPlan?: string;
-  onBackToPricing: () => void;
 }
+
+const inputStyle = {
+  width: '100%',
+  padding: '14px 16px',
+  border: '2px solid #d1d5db',
+  borderRadius: '10px',
+  fontSize: '1rem',
+  transition: 'all 0.2s',
+  outline: 'none'
+};
+
+const labelStyle = {
+  display: 'block',
+  fontSize: '0.95rem',
+  fontWeight: '600',
+  color: '#374151',
+  marginBottom: '10px'
+};
 
 const getSubscriptionType = (plan: string | undefined): 'basic' | 'premium' | 'pro' => {
   if (plan === '1 Month') return 'basic';
@@ -17,11 +33,11 @@ const getSubscriptionType = (plan: string | undefined): 'basic' | 'premium' | 'p
   return 'basic';
 };
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onClose, selectedPlan, onBackToPricing }) => {
+export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onClose, selectedPlan }) => {
   const { register, isLoading } = useAuth();
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -33,10 +49,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
   });
   const [error, setError] = useState('');
 
-  const planDetails: Record<string, { name: string, price: string, duration: string, features: string[] }> = {
-    '1 Month': { name: '1 Month Plan', price: '149 SEK', duration: '1 Month', features: ['Full access to all theory', '1000+ practice questions', 'Realistic final tests'] },
-    '3 Months': { name: '3 Months Plan', price: '299 SEK', duration: '3 Months', features: ['All features from 1 Month', 'Save on monthly cost', 'Ideal for most learners'] },
-    '6 Months': { name: '6 Months Plan', price: '499 SEK', duration: '6 Months', features: ['All features from 3 Months', 'Best value for long-term study', 'No pressure, learn at your pace'] }
+  const planDetails: Record<string, { name: string, price: string, features: string[] }> = {
+    '1 Month': { name: '1 Month', price: '149 SEK', features: ['Full access to all theory', '1000+ practice questions', 'Realistic final tests'] },
+    '3 Months': { name: '3 Months', price: '299 SEK', features: ['All features from 1 Month', 'Save on monthly cost', 'Ideal for most learners'] },
+    '6 Months': { name: '6 Months', price: '499 SEK', features: ['All features from 3 Months', 'Best value for long-term study', 'No pressure, learn at your pace'] }
   };
 
   const validateForm = () => {
@@ -60,15 +76,6 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
     try {
       await register(formData);
       onClose();
-      
-      // Navigate to checkout page with plan details
-      if (selectedPlan && planDetails[selectedPlan]) {
-        navigate('/checkout', {
-          state: {
-            planDetails: planDetails[selectedPlan]
-          }
-        });
-      }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     }
@@ -82,18 +89,12 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
   };
 
   return (
-    <div style={{ 
-      maxWidth: '48rem', 
-      margin: '0 auto',
-      backgroundColor: 'white',
-      borderRadius: '16px',
-      padding: '0'
-    }}>
+    <div style={{ maxWidth: '52rem', margin: '0 auto' }}>
       <h2 style={{ 
-        fontSize: '2rem', 
+        fontSize: '2.25rem', 
         fontWeight: '700', 
         textAlign: 'center',
-        marginBottom: '32px',
+        marginBottom: '36px',
         color: '#7e11d6',
         letterSpacing: '-0.02em'
       }}>
@@ -108,7 +109,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
           padding: '16px 20px',
           borderRadius: '12px',
           marginBottom: '28px',
-          fontWeight: '500'
+          fontWeight: '500',
+          fontSize: '0.95rem'
         }}>
           {error}
         </div>
@@ -140,64 +142,19 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
           </ul>
         </div>
       )}
-      
-      {!selectedPlan && (
-        <div 
-          onClick={onBackToPricing}
-          style={{
-            backgroundColor: '#fef3c7',
-            border: '2px solid #fbbf24',
-            borderRadius: '12px',
-            padding: '16px',
-            marginBottom: '12px',
-            textAlign: 'center',
-            color: '#92400e',
-            cursor: 'pointer',
-            transition: 'all 0.2s'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#fde68a';
-            e.currentTarget.style.transform = 'scale(1.02)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#fef3c7';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-        >
-          <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: '600' }}>
-            💡 Click here to select a plan first
-          </p>
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {/* Name Fields */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           <div>
-            <label style={{ 
-              display: 'block', 
-              fontSize: '0.95rem', 
-              fontWeight: '600', 
-              color: '#374151',
-              marginBottom: '10px'
-            }}>
-              First Name
-            </label>
+            <label style={labelStyle}>First Name</label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '14px 16px',
-                border: '2px solid #d1d5db',
-                borderRadius: '10px',
-                fontSize: '1rem',
-                transition: 'all 0.2s',
-                outline: 'none'
-              }}
+              style={inputStyle}
               placeholder="First name"
               onFocus={(e) => {
                 e.target.style.borderColor = '#7e11d6';
@@ -210,30 +167,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
             />
           </div>
           <div>
-            <label style={{ 
-              display: 'block', 
-              fontSize: '0.95rem', 
-              fontWeight: '600', 
-              color: '#374151',
-              marginBottom: '10px'
-            }}>
-              Last Name
-            </label>
+            <label style={labelStyle}>Last Name</label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '14px 16px',
-                border: '2px solid #d1d5db',
-                borderRadius: '10px',
-                fontSize: '1rem',
-                transition: 'all 0.2s',
-                outline: 'none'
-              }}
+              style={inputStyle}
               placeholder="Last name"
               onFocus={(e) => {
                 e.target.style.borderColor = '#7e11d6';
@@ -247,32 +188,16 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
           </div>
         </div>
 
-        {/* Email Field */}
+        {/* Email */}
         <div>
-          <label style={{
-            display: 'block',
-            fontSize: '0.95rem',
-            fontWeight: '600',
-            color: '#374151',
-            marginBottom: '10px'
-          }}>
-            Email Address
-          </label>
+          <label style={labelStyle}>Email Address</label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '14px 16px',
-              border: '2px solid #d1d5db',
-              borderRadius: '10px',
-              fontSize: '1rem',
-              transition: 'all 0.2s',
-              outline: 'none'
-            }}
+            style={inputStyle}
             placeholder="your@email.com"
             onFocus={(e) => {
               e.target.style.borderColor = '#7e11d6';
@@ -285,31 +210,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
           />
         </div>
 
-        {/* Phone Field */}
+        {/* Phone */}
         <div>
-          <label style={{
-            display: 'block',
-            fontSize: '0.95rem',
-            fontWeight: '600',
-            color: '#374151',
-            marginBottom: '10px'
-          }}>
-            Phone Number (Optional)
-          </label>
+          <label style={labelStyle}>Phone Number (Optional)</label>
           <input
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            style={{
-              width: '100%',
-              padding: '14px 16px',
-              border: '2px solid #d1d5db',
-              borderRadius: '10px',
-              fontSize: '1rem',
-              transition: 'all 0.2s',
-              outline: 'none'
-            }}
+            style={inputStyle}
             placeholder="Phone number"
             onFocus={(e) => {
               e.target.style.borderColor = '#7e11d6';
@@ -325,15 +234,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
         {/* Password Fields */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           <div>
-            <label style={{
-              display: 'block',
-              fontSize: '0.95rem',
-              fontWeight: '600',
-              color: '#374151',
-              marginBottom: '10px'
-            }}>
-              Password
-            </label>
+            <label style={labelStyle}>Password</label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -341,15 +242,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
                 value={formData.password}
                 onChange={handleChange}
                 required
-                style={{
-                  width: '100%',
-                  padding: '14px 44px 14px 16px',
-                  border: '2px solid #d1d5db',
-                  borderRadius: '10px',
-                  fontSize: '1rem',
-                  transition: 'all 0.2s',
-                  outline: 'none'
-                }}
+                style={{ ...inputStyle, paddingRight: '44px' }}
                 placeholder="Password"
                 onFocus={(e) => {
                   e.target.style.borderColor = '#7e11d6';
@@ -380,15 +273,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
             </div>
           </div>
           <div>
-            <label style={{
-              display: 'block',
-              fontSize: '0.95rem',
-              fontWeight: '600',
-              color: '#374151',
-              marginBottom: '10px'
-            }}>
-              Confirm Password
-            </label>
+            <label style={labelStyle}>Confirm Password</label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
@@ -396,15 +281,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                style={{
-                  width: '100%',
-                  padding: '14px 44px 14px 16px',
-                  border: '2px solid #d1d5db',
-                  borderRadius: '10px',
-                  fontSize: '1rem',
-                  transition: 'all 0.2s',
-                  outline: 'none'
-                }}
+                style={{ ...inputStyle, paddingRight: '44px' }}
                 placeholder="Confirm password"
                 onFocus={(e) => {
                   e.target.style.borderColor = '#7e11d6';

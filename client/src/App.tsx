@@ -6,7 +6,8 @@ import './App.scss';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false); // State for the modal
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const [showLoginDirectly, setShowLoginDirectly] = useState(false);
 
   const features = [
     {
@@ -45,7 +46,18 @@ function App() {
           <TopNav 
             isDarkMode={isDarkMode}
             onThemeToggle={() => setIsDarkMode(!isDarkMode)}
-            onRegisterBuyClick={() => setIsPricingModalOpen(true)} // Pass the function to open the modal
+            onRegisterBuyClick={() => {
+              console.log('App: Setting modal open for register');
+              setShowLoginDirectly(false);
+              setIsPricingModalOpen(true);
+              console.log('App: isPricingModalOpen should be true');
+            }}
+            onLoginClick={() => {
+              console.log('App: Setting modal open for login');
+              setShowLoginDirectly(true);
+              setIsPricingModalOpen(true);
+              console.log('App: isPricingModalOpen should be true');
+            }}
           />
           
           {/* Main Content Area - No Sidebar needed here anymore */}
@@ -72,6 +84,7 @@ function App() {
       <PricingModal 
         isOpen={isPricingModalOpen}
         onClose={() => setIsPricingModalOpen(false)}
+        showLoginDirectly={showLoginDirectly}
       />
     </>
   );
