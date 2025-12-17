@@ -8,6 +8,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [showLoginDirectly, setShowLoginDirectly] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('eng');
 
   const features = [
     {
@@ -46,6 +47,8 @@ function App() {
           <TopNav 
             isDarkMode={isDarkMode}
             onThemeToggle={() => setIsDarkMode(!isDarkMode)}
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={(lang) => setSelectedLanguage(lang)}
             onRegisterBuyClick={() => {
               console.log('App: Setting modal open for register');
               setShowLoginDirectly(false);

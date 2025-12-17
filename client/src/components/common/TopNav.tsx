@@ -23,9 +23,13 @@ const navItems = [
 ];
 
 const languageOptions = [
-  { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
-  { code: 'ban', name: 'বাংলা', flag: '🇧🇩' },
-  { code: 'eng', name: 'English', flag: '🇺🇸' },
+  { code: 'sv', name: 'Svenska', flag: 'se', countryCode: 'SE' },
+  { code: 'ban', name: 'বাংলা', flag: 'bd', countryCode: 'BD' },
+  { code: 'eng', name: 'English', flag: 'us', countryCode: 'US' },
+  { code: 'ar', name: 'العربية', flag: 'sa', countryCode: 'SA' },
+  { code: 'fa', name: 'فارسی', flag: 'ir', countryCode: 'IR' },
+  { code: 'ua', name: 'Українська', flag: 'ua', countryCode: 'UA' },
+  { code: 'ur', name: 'اردو', flag: 'pk', countryCode: 'PK' },
 ];
 
 export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBuyClick, onLoginClick, selectedLanguage = 'eng', onLanguageChange }: TopNavProps) {
@@ -65,8 +69,13 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
               className={`language-btn ${isDarkMode ? 'dark' : 'light'}`}
             >
               <Globe size={16} />
-              <span className="language-text">
-                {currentLanguage.flag} {currentLanguage.code.toUpperCase()}
+              <span className="language-text" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <img 
+                  src={`https://flagcdn.com/16x12/${currentLanguage.flag}.png`} 
+                  alt={currentLanguage.countryCode}
+                  style={{ width: '20px', height: '15px', objectFit: 'cover', borderRadius: '2px' }}
+                />
+                <span>{currentLanguage.code.toUpperCase()}</span>
               </span>
               <ChevronDown size={14} className={`chevron ${isLanguageDropdownOpen ? 'rotated' : ''}`} />
             </button>
@@ -79,7 +88,12 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
                     onClick={() => handleLanguageSelect(lang.code)}
                     className={`language-option ${selectedLanguage === lang.code ? 'active' : ''} ${isDarkMode ? 'dark' : 'light'}`}
                   >
-                    <span className="flag">{lang.flag}</span>
+                    <img 
+                      src={`https://flagcdn.com/16x12/${lang.flag}.png`} 
+                      alt={lang.countryCode}
+                      className="flag"
+                      style={{ width: '24px', height: '18px', objectFit: 'cover', borderRadius: '2px', marginRight: '8px' }}
+                    />
                     <span className="lang-name">{lang.name}</span>
                     <span className="lang-code">({lang.code.toUpperCase()})</span>
                   </button>

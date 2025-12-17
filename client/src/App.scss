@@ -288,12 +288,20 @@ p {
             }
 
             .flag {
-              font-size: 1rem;
+              font-size: 1.25rem;
+              line-height: 1;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              min-width: 1.5rem;
+              font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
             }
 
             .lang-name {
               flex: 1;
               font-weight: 500;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Noto Sans Arabic', 'Noto Sans Bengali', 'Noto Nastaliq Urdu', sans-serif;
+              font-size: 0.95rem;
             }
 
             .lang-code {
