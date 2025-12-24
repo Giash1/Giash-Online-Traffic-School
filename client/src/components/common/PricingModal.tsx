@@ -132,8 +132,9 @@ export default function PricingModal({ isOpen, onClose, showLoginDirectly = fals
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           overflowY: 'auto',
+          padding: '80px 20px 40px',
           zIndex: 99999
         }}
         onClick={handleCloseAll}
@@ -146,7 +147,6 @@ export default function PricingModal({ isOpen, onClose, showLoginDirectly = fals
             maxWidth: '42rem',
             width: '100%',
             position: 'relative',
-            margin: '32px 0',
             zIndex: 100000
           }}
           onClick={e => e.stopPropagation()}

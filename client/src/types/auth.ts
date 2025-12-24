@@ -23,7 +23,7 @@ export interface RegisterData {
   lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   phone?: string;
   subscriptionType: 'basic' | 'premium' | 'pro';
 }

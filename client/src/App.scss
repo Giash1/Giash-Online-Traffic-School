@@ -7,7 +7,6 @@ $primary-color: rgb(126, 17, 214);
 
 // Global heading styles with primary color
 h1, h2, h3, h4, h5, h6 {
-  color: $primary-color;
   font-weight: 600;
 }
 
@@ -19,7 +18,6 @@ h1, h2, h3, h4, h5, h6 {
 
 // Paragraph styles with primary color
 p {
-  color: $primary-color;
   line-height: 1.6;
 }
 
@@ -101,7 +99,7 @@ p {
 .top-nav {
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 1100;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -474,6 +472,22 @@ p {
    ================================================ */
 
 // Add theory lessons page styles here when needed
+
+.more-lessons {
+  margin-top: 40px;
+  padding: 24px;
+  background-color: #fef3c7;
+  border-radius: 12px;
+  border: 2px solid #fbbf24;
+  text-align: center;
+
+  p {
+    color: #92400e;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+  }
+}
 
 /* ================================================
    TRAFFIC SIGNS PAGE STYLING

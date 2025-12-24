@@ -9,11 +9,19 @@ interface AuthenticatedRequest extends Request {
 
 export const register = async (req: Request, res: Response) => {
   try {
+    console.log('📝 Registration request received:', req.body);
     const { firstName, lastName, email, password, phone, subscriptionType } = req.body;
+
+    // Validate required fields
+    if (!firstName || !lastName || !email || !password) {
+      console.log('❌ Missing required fields');
+      return res.status(400).json({ message: 'All fields are required' });
+    }
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log('❌ User already exists:', email);
       return res.status(400).json({ message: 'User already exists' });
     }
 
@@ -31,7 +39,9 @@ export const register = async (req: Request, res: Response) => {
       }
     });
 
+    console.log('💾 Saving user to database...');
     await user.save();
+    console.log('✅ User saved successfully');
 
     // Generate JWT
     const token = jwt.sign(
@@ -43,12 +53,14 @@ export const register = async (req: Request, res: Response) => {
     // Return user without password
     const { password: _, ...userWithoutPassword } = user.toObject();
     
+    console.log('✅ Registration successful for:', email);
     res.status(201).json({
       user: userWithoutPassword,
       token
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    console.error('❌ Registration error:', error);
+    res.status(500).json({ message: 'Server error', error: error instanceof Error ? error.message : 'Unknown error' });
   }
 };
 

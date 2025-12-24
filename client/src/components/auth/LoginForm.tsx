@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -27,6 +28,7 @@ const labelStyle = {
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onClose }) => {
   const { login, isLoading } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
@@ -55,6 +57,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onClos
     try {
       await login(formData);
       onClose();
+      navigate('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
     }

@@ -40,6 +40,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
   };
 
   const validateForm = () => {
+    if (!selectedPlan) {
+      setError('Please select a plan before registering');
+      return false;
+    }
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return false;
@@ -53,16 +57,26 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🚀 Form submitted', { selectedPlan, formData });
     setError('');
 
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      console.log('❌ Validation failed');
+      return;
+    }
 
     try {
-      await register(formData);
+      console.log('📤 Calling register API...');
+      // Remove confirmPassword before sending to API
+      const { confirmPassword, ...registrationData } = formData;
+      console.log('📤 Registration data:', registrationData);
+      await register(registrationData);
+      console.log('✅ Registration successful');
       onClose();
       
       // Navigate to checkout page with plan details
       if (selectedPlan && planDetails[selectedPlan]) {
+        console.log('🚀 Navigating to checkout with plan:', planDetails[selectedPlan]);
         navigate('/checkout', {
           state: {
             planDetails: planDetails[selectedPlan]
@@ -70,7 +84,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
         });
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      console.error('❌ Registration error:', err);
+      const errorMessage = err.response?.data?.message || err.message || 'Registration failed. Please try again.';
+      console.error('Error message:', errorMessage);
+      setError(errorMessage);
     }
   };
 
@@ -439,38 +456,38 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onC
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || !selectedPlan}
           style={{
             width: '100%',
-            backgroundColor: '#7e11d6',
+            backgroundColor: !selectedPlan ? '#9ca3af' : '#7e11d6',
             color: 'white',
             padding: '16px 24px',
             borderRadius: '12px',
             fontWeight: '700',
             fontSize: '1.05rem',
             border: 'none',
-            cursor: isLoading ? 'not-allowed' : 'pointer',
+            cursor: (isLoading || !selectedPlan) ? 'not-allowed' : 'pointer',
             transition: 'all 0.2s',
-            opacity: isLoading ? 0.6 : 1,
+            opacity: (isLoading || !selectedPlan) ? 0.6 : 1,
             boxShadow: '0 4px 12px rgba(126, 17, 214, 0.3)',
             marginTop: '8px'
           }}
           onMouseEnter={(e) => {
-            if (!isLoading) {
+            if (!isLoading && selectedPlan) {
               e.currentTarget.style.backgroundColor = '#6b0fb8';
               e.currentTarget.style.transform = 'translateY(-2px)';
               e.currentTarget.style.boxShadow = '0 6px 16px rgba(126, 17, 214, 0.4)';
             }
           }}
           onMouseLeave={(e) => {
-            if (!isLoading) {
+            if (!isLoading && selectedPlan) {
               e.currentTarget.style.backgroundColor = '#7e11d6';
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.boxShadow = '0 4px 12px rgba(126, 17, 214, 0.3)';
             }
           }}
         >
-          {isLoading ? 'Creating Account...' : 'Create Account & Buy'}
+          {isLoading ? 'Creating Account...' : !selectedPlan ? 'Please Select a Plan First' : 'Create Account & Buy'}
         </button>
       </form>
 

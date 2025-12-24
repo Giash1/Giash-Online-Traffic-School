@@ -1,6 +1,7 @@
 
 import { LogIn, UserPlus, Moon, Sun, Globe, ChevronDown, LayoutDashboard, BrainCircuit, BookOpen, TrafficCone, FileText, Trophy, BarChart, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 interface TopNavProps {
@@ -15,7 +16,7 @@ interface TopNavProps {
 const navItems = [
   { name: 'Dashboard', icon: LayoutDashboard, href: '#' },
   { name: 'IQ Questions', icon: BrainCircuit, href: '#' },
-  { name: 'Theory Lessons', icon: BookOpen, href: '#' },
+  { name: 'Theory Sections', icon: BookOpen, href: '#' },
   { name: 'Traffic Signs', icon: TrafficCone, href: '#' },
   { name: 'Practice Tests', icon: FileText, href: '#' },
   { name: 'Final Test', icon: Trophy, href: '#' },
@@ -59,7 +60,7 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
           <img src="/LOGO.png" alt="Logo Left" className="logo" />
         </div>
         <div className="title-container">
-          <h1 className="school-title">Giash Online Traffic School</h1>
+          <h1 className="school-title">KörStart</h1>
         </div>
         <div className="header-right">
           {/* Language Selector */}
@@ -114,12 +115,34 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
         
         {/* LEFT: Navigation Links */}
         <div className="nav-links">
-          {navItems.map(item => (
-            <a key={item.name} href={item.href} className={`nav-item ${isDarkMode ? 'dark' : 'light'}`}>
-              <item.icon size={18} />
-              <span className="nav-text">{item.name}</span>
-            </a>
-          ))}
+          {navItems.map(item => {
+            // map some common names to routes
+            const routeMap: Record<string, string> = {
+              'Dashboard': '/dashboard',
+              'Theory Sections': '/theory-lessons',
+              'Practice Tests': '/practice-tests',
+              'Final Test': '/final-test',
+              'IQ Questions': '/iq-questions',
+              'Traffic Signs': '/traffic-signs',
+              'Results': '/results'
+            };
+            const navigate = useNavigate();
+            const route = routeMap[item.name] || item.href || '#';
+
+            return (
+              <button
+                key={item.name}
+                onClick={() => {
+                  if (route && route !== '#') navigate(route);
+                }}
+                className={`nav-item ${isDarkMode ? 'dark' : 'light'}`}
+                style={{ background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+              >
+                <item.icon size={18} />
+                <span className="nav-text">{item.name}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* RIGHT: Actions (Login, Register/Buy or User Menu) */}
