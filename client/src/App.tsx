@@ -1,30 +1,33 @@
 import { BookOpen, Languages, HelpCircle, Trophy } from 'lucide-react';
 import './App.scss';
+import { useLanguage } from './context/LanguageContext';
+import { t } from './i18n';
 
 function App() {
+  const { language } = useLanguage ? useLanguage() : { language: 'eng' };
   const features = [
     {
       icon: Languages,
-      title: 'Multi-Language Support',
-      description: 'Learn in Swedish, English, or Bangla. Our platform is designed to break down language barriers, making learning accessible for everyone.',
+      title: t(language, 'welcome.feature1.title'),
+      description: t(language, 'welcome.feature1.desc'),
       color: 'text-blue-500'
     },
     {
       icon: BookOpen,
-      title: 'Comprehensive Theory',
-      description: 'We cover all chapters of the official Swedish driving license theory book, simplifying complex topics with clear explanations.',
+      title: t(language, 'welcome.feature2.title'),
+      description: t(language, 'welcome.feature2.desc'),
       color: 'text-green-500'
     },
     {
       icon: HelpCircle,
-      title: '1000+ Practice Questions',
-      description: 'Test your knowledge with a vast question bank that mirrors the real exam, with detailed explanations for every question.',
+      title: t(language, 'welcome.feature3.title'),
+      description: t(language, 'welcome.feature3.desc'),
       color: 'text-yellow-500'
     },
     {
       icon: Trophy,
-      title: 'Realistic Final Tests',
-      description: 'Simulate the actual test environment to build your confidence and readiness for the final exam.',
+      title: t(language, 'welcome.feature4.title'),
+      description: t(language, 'welcome.feature4.desc'),
       color: 'text-red-500'
     }
   ];
@@ -36,8 +39,8 @@ function App() {
     >
       <div className={`min-h-screen w-full bg-gray-50/80 backdrop-blur-sm`}>
         <main className="main-content">
-          <h1 className="welcome-heading">Welcome to KörStart </h1>
-          <p className="welcome-subheading">Your complete guide to passing the Swedish driving license theory test.</p>
+          <h1 className="welcome-heading">{t(language, 'welcome.title')}</h1>
+          <p className="welcome-subheading">{t(language, 'welcome.subtitle')}</p>
 
           <div className="features-grid">
             {features.map((feature, index) => (

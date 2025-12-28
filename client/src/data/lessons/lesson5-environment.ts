@@ -2,8 +2,8 @@ import { Lesson } from '../lessonData';
 
 export const lesson5: Lesson = {
   id: 5,
-  title: 'The Environment',
-  description: 'How transport choices and driving affect the environment',
+  title: "Environment",
+  description: "Eco-driving techniques, fuel efficiency, emissions reduction, tire pressure management, and environmental impact of driving - 5 questions",
   pages: [
     {
       id: 1,

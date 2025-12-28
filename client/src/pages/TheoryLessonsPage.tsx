@@ -1,10 +1,29 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, ArrowRight, TrafficCone, Shield, Car, Leaf, AlertTriangle } from 'lucide-react';
-import { lessons } from '../data/lessonData';
+import { getLocalizedLessons } from '../data/lessonData';
+import { useLanguage } from '../context/LanguageContext';
+import { t, TranslationKey } from '../i18n';
 
 const TheoryLessonsPage: React.FC = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const lessons = getLocalizedLessons(language).map((lesson) => {
+    const description = t(language, `lesson${lesson.id}.desc` as TranslationKey);
+    // Extract question count from description (e.g., "- 32 questions" or "- 32 frågor")
+    const questionMatch = description.match(/(\d+)\s*(questions?|frågor?|প্রশ্ন|أسئلة|سؤالاً|سوالات)/i);
+    const questionCount = questionMatch ? questionMatch[1] : null;
+    const descWithoutCount = questionCount 
+      ? description.replace(/\s*-\s*\d+\s*(questions?|frågor?|প্রশ্ন|أسئلة|سؤالاً|سوالات)/i, '').trim()
+      : description;
+    
+    return {
+      ...lesson,
+      title: t(language, `lesson${lesson.id}.title` as TranslationKey),
+      description: descWithoutCount,
+      questionCount
+    };
+  });
 
   return (
     <div style={{
@@ -33,10 +52,10 @@ const TheoryLessonsPage: React.FC = () => {
             marginBottom: '12px',
             color: 'white'
           }}>
-            Theory Sections
+            {t(language, 'theory.title')}
           </h2>
           <p style={{ fontSize: '1.1rem', opacity: 0.95, color: 'white' }}>
-            Master all the theory topics required for your Swedish driving license. Complete each section at your own pace.
+            {t(language, 'theory.description')}
           </p>
         </div>
 
@@ -89,10 +108,24 @@ const TheoryLessonsPage: React.FC = () => {
                     fontSize: '1.25rem',
                     fontWeight: '700',
                     color: '#111827',
-                    margin: 0
+                    margin: 0,
+                    flex: 1
                   }}>
                     {lesson.title}
                   </h3>
+                  {lesson.questionCount && (
+                    <div style={{
+                      backgroundColor: '#7e11d6',
+                      color: 'white',
+                      padding: '4px 12px',
+                      borderRadius: '20px',
+                      fontSize: '0.85rem',
+                      fontWeight: '700',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {lesson.questionCount} Q
+                    </div>
+                  )}
                 </div>
 
                 <p style={{
@@ -112,7 +145,7 @@ const TheoryLessonsPage: React.FC = () => {
                   color: '#7e11d6',
                   fontWeight: 700
                 }}>
-                  <span>Open section</span>
+                  <span>{t(language, 'theory.openSection')}</span>
                   <ArrowRight size={18} />
                 </div>
               </div>
@@ -122,7 +155,7 @@ const TheoryLessonsPage: React.FC = () => {
 
         {/* Add More Lessons Notice */}
         <div className="more-lessons">
-          <p>📚 More lessons coming soon! We're continuously adding new content to help you succeed.</p>
+          <p>{t(language, 'theory.moreSoon')}</p>
         </div>
       </main>
     </div>

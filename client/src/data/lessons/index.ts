@@ -1,5 +1,5 @@
 // Import all lessons
-import { lesson1 } from './lesson1-introduction';
+import { lesson1 } from './lesson1-introduction.en';
 import { lesson2 } from './lesson2-traffic-rules';
 import { lesson3 } from './lesson3-road-signs';
 import { lesson4 } from './lesson4-vehicle-knowledge';

@@ -2,8 +2,8 @@ import { Lesson } from '../lessonData';
 
 export const lesson3: Lesson = {
   id: 3,
-  title: "Actions and Reactions",
-  description: "How substances, fatigue and external factors affect driver behaviour",
+  title: "Personal Conditions",
+  description: "Understanding how alcohol, drugs, medications, fatigue, stress, vision, medical conditions, and risky behaviors affect your ability to drive safely - 5 questions",
   pages: [
     {
       id: 1,

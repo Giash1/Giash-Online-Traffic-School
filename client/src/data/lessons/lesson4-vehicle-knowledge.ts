@@ -2,8 +2,8 @@ import { Lesson } from '../lessonData';
 
 export const lesson4: Lesson = {
   id: 4,
-  title: 'Vehicle Knowledge and Maneuvering',
-  description: 'How the vehicle works and how the road conditions affect its driving characteristics',
+  title: "Vehicle Knowledge & Maneuvering",
+  description: "Learn about brakes, tires, lights, safety equipment, cargo loading, vehicle inspection, and maneuvering techniques - 7 questions",
   pages: [
     {
       id: 1,

@@ -2,8 +2,8 @@ import { Lesson } from '../lessonData';
 
 export const lesson6: Lesson = {
   id: 6,
-  title: 'Road Safety',
-  description: 'Principles of safe driving and adapting to road conditions',
+  title: "Traffic Safety",
+  description: "Risk assessment, safe distance, adapting to weather conditions, night driving, child safety, accident prevention, and maintaining attention - 16 questions",
   pages: [
     {
       id: 1,

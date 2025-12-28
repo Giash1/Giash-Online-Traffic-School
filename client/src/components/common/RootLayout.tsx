@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import TopNav from './TopNav';
 import PricingModal from './PricingModal';
+import Footer from './Footer';
+import { LanguageProvider, useLanguage } from '../../context/LanguageContext';
 
-const RootLayout: React.FC = () => {
+const RootLayoutInner: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [showLoginDirectly, setShowLoginDirectly] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('eng');
+  const { language, setLanguage } = useLanguage();
 
   return (
     <>
       <TopNav
         isDarkMode={isDarkMode}
         onThemeToggle={() => setIsDarkMode(!isDarkMode)}
-        selectedLanguage={selectedLanguage}
-        onLanguageChange={(lang) => setSelectedLanguage(lang)}
+        selectedLanguage={language}
+        onLanguageChange={(lang) => setLanguage(lang as any)}
         onRegisterBuyClick={() => {
           setShowLoginDirectly(false);
           setIsPricingModalOpen(true);
@@ -33,8 +35,15 @@ const RootLayout: React.FC = () => {
         onClose={() => setIsPricingModalOpen(false)}
         showLoginDirectly={showLoginDirectly}
       />
+      <Footer />
     </>
   );
 };
+
+const RootLayout: React.FC = () => (
+  <LanguageProvider>
+    <RootLayoutInner />
+  </LanguageProvider>
+);
 
 export default RootLayout;

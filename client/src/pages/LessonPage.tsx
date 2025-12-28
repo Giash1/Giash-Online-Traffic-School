@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
-import { getLessonById } from '../data/lessonData';
+import { getLessonByIdLocalized } from '../data/lessonData';
 import LessonContent from '../components/lessons/LessonContent';
+import { useLanguage } from '../context/LanguageContext';
+import { t } from '../i18n';
 
 const LessonPage: React.FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
-  const lesson = getLessonById(Number(lessonId));
+  const { language } = useLanguage();
+
+  const lesson = getLessonByIdLocalized(Number(lessonId), language);
 
   if (!lesson) {
     return (
@@ -22,7 +26,7 @@ const LessonPage: React.FC = () => {
       }}>
         <div style={{ textAlign: 'center' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: '700', color: '#374151', marginBottom: '16px' }}>
-            Lesson Not Found
+            {t(language, 'lesson.notFound')}
           </h2>
           <button
             onClick={() => navigate('/dashboard')}
@@ -37,7 +41,7 @@ const LessonPage: React.FC = () => {
               fontWeight: '600'
             }}
           >
-            Back to Dashboard
+            {t(language, 'lesson.backToDashboard')}
           </button>
         </div>
       </div>
@@ -106,7 +110,7 @@ const LessonPage: React.FC = () => {
           marginBottom: '24px'
         }}>
           <span style={{ color: '#6b7280', fontSize: '0.95rem', fontWeight: '600' }}>
-            Page {currentPageIndex + 1} of {lesson.pages.length}
+            {t(language, 'lesson.pageOf', { current: currentPageIndex + 1, total: lesson.pages.length })}
           </span>
           <div style={{
             flex: 1,
@@ -174,43 +178,63 @@ const LessonPage: React.FC = () => {
           }}
         >
           <ArrowLeft size={20} />
-          Previous
+          {t(language, 'lesson.previous')}
         </button>
 
-        <div style={{
-          display: 'flex',
-          gap: '8px',
-          alignItems: 'center'
-        }}>
-          {lesson.pages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentPageIndex(index);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                border: 'none',
-                backgroundColor: index === currentPageIndex ? '#7e11d6' : '#d1d5db',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                padding: 0
-              }}
-              onMouseEnter={(e) => {
-                if (index !== currentPageIndex) {
-                  e.currentTarget.style.backgroundColor = '#9ca3af';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (index !== currentPageIndex) {
-                  e.currentTarget.style.backgroundColor = '#d1d5db';
-                }
-              }}
-            />
-          ))}
+        <div
+          aria-label="Quick page navigation"
+          style={{
+            display: 'flex',
+            gap: '8px',
+            alignItems: 'center',
+            overflowX: 'auto',
+            maxWidth: '520px',
+            padding: '6px 4px'
+          }}
+        >
+          {lesson.pages.map((p, index) => {
+            const isActive = index === currentPageIndex;
+
+            return (
+              <button
+                key={p.id ?? index}
+                title={p.title}
+                aria-current={isActive ? 'page' : undefined}
+                onClick={() => {
+                  setCurrentPageIndex(index);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                style={{
+                  minWidth: '40px',
+                  height: '32px',
+                  padding: '0 10px',
+                  borderRadius: '10px',
+                  border: `2px solid ${isActive ? '#7e11d6' : '#e5e7eb'}`,
+                  backgroundColor: isActive ? '#7e11d6' : 'white',
+                  color: isActive ? 'white' : '#374151',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  fontWeight: '700',
+                  transition: 'all 0.2s',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = '#7e11d6';
+                    e.currentTarget.style.color = '#7e11d6';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = '#e5e7eb';
+                    e.currentTarget.style.color = '#374151';
+                  }
+                }}
+              >
+                {index + 1}
+              </button>
+            );
+          })}
         </div>
 
         <button
@@ -245,7 +269,7 @@ const LessonPage: React.FC = () => {
             }
           }}
         >
-          {isLastPage ? 'Completed' : 'Next'}
+          {isLastPage ? t(language, 'lesson.completed') : t(language, 'lesson.next')}
           {!isLastPage && <ArrowRight size={20} />}
         </button>
       </div>

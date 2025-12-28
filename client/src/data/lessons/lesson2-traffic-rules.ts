@@ -2,8 +2,8 @@ import { Lesson } from '../lessonData';
 
 export const lesson2: Lesson = {
   id: 2,
-  title: "Rules of the Road",
-  description: "Road signs, road markings, speed limits and obligations to other road users",
+  title: "Traffic Rules",
+  description: "Comprehensive coverage of road signs, right-of-way rules, speed limits, intersections, roundabouts, overtaking, parking regulations, and rules for all road users - 32 questions",
   pages: [
     {
       id: 1,

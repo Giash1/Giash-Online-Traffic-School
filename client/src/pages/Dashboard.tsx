@@ -1,10 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, FileQuestion, Trophy } from 'lucide-react';
-import { lessons } from '../data/lessonData';
+import { getLocalizedLessons } from '../data/lessonData';
+import { useLanguage } from '../context/LanguageContext';
+import { t } from '../i18n';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const lessons = getLocalizedLessons(language);
 
   return (
     <div style={{
@@ -35,10 +39,10 @@ const Dashboard: React.FC = () => {
             fontWeight: '700',
             marginBottom: '12px'
           }}>
-            Ready to Start Learning?
+            {t(language, 'dashboard.readyTitle')}
           </h2>
           <p style={{ fontSize: '1.1rem', opacity: 0.95 }}>
-            Your journey to getting a Swedish driving license starts here. Complete all theory lessons and practice tests.
+            {t(language, 'dashboard.readyDescription')}
           </p>
         </div>
 
@@ -76,10 +80,10 @@ const Dashboard: React.FC = () => {
               color: '#111827',
               marginBottom: '8px'
             }}>
-              Practice Tests
+              {t(language, 'dashboard.practiceTitle')}
             </h3>
             <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
-              Test your knowledge with practice questions
+              {t(language, 'dashboard.practiceDescription')}
             </p>
           </div>
 
@@ -110,10 +114,10 @@ const Dashboard: React.FC = () => {
               color: '#111827',
               marginBottom: '8px'
             }}>
-              Final Test
+              {t(language, 'dashboard.finalTitle')}
             </h3>
             <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
-              Take the simulated final exam
+              {t(language, 'dashboard.finalDescription')}
             </p>
           </div>
         </div>
@@ -131,7 +135,7 @@ const Dashboard: React.FC = () => {
             color: '#111827',
             margin: 0
           }}>
-            Theory Sections
+            {t(language, 'dashboard.theoryTitle')}
           </h2>
           <button
             onClick={() => navigate('/theory-lessons')}
@@ -156,7 +160,7 @@ const Dashboard: React.FC = () => {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            View All Sections →
+            {t(language, 'dashboard.viewAll')}
           </button>
         </div>
 

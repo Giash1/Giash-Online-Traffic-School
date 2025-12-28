@@ -3,6 +3,7 @@ import { LogIn, UserPlus, Moon, Sun, Globe, ChevronDown, LayoutDashboard, BrainC
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { t } from '../../i18n';
 
 interface TopNavProps {
   isDarkMode?: boolean;
@@ -14,13 +15,13 @@ interface TopNavProps {
 }
 
 const navItems = [
-  { name: 'Dashboard', icon: LayoutDashboard, href: '#' },
-  { name: 'IQ Questions', icon: BrainCircuit, href: '#' },
-  { name: 'Theory Sections', icon: BookOpen, href: '#' },
-  { name: 'Traffic Signs', icon: TrafficCone, href: '#' },
-  { name: 'Practice Tests', icon: FileText, href: '#' },
-  { name: 'Final Test', icon: Trophy, href: '#' },
-  { name: 'Results', icon: BarChart, href: '#' },
+  { key: 'nav.dashboard' as const, icon: LayoutDashboard, route: '/dashboard' },
+  { key: 'nav.iqQuestions' as const, icon: BrainCircuit, route: '/iq-questions' },
+  { key: 'nav.theorySections' as const, icon: BookOpen, route: '/theory-lessons' },
+  { key: 'nav.trafficSigns' as const, icon: TrafficCone, route: '/traffic-signs' },
+  { key: 'nav.practiceTests' as const, icon: FileText, route: '/practice-tests' },
+  { key: 'nav.finalTest' as const, icon: Trophy, route: '/final-test' },
+  { key: 'nav.results' as const, icon: BarChart, route: '/results' },
 ];
 
 const languageOptions = [
@@ -35,6 +36,7 @@ const languageOptions = [
 
 export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBuyClick, onLoginClick, selectedLanguage = 'eng', onLanguageChange }: TopNavProps) {
   const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   
@@ -115,34 +117,16 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
         
         {/* LEFT: Navigation Links */}
         <div className="nav-links">
-          {navItems.map(item => {
-            // map some common names to routes
-            const routeMap: Record<string, string> = {
-              'Dashboard': '/dashboard',
-              'Theory Sections': '/theory-lessons',
-              'Practice Tests': '/practice-tests',
-              'Final Test': '/final-test',
-              'IQ Questions': '/iq-questions',
-              'Traffic Signs': '/traffic-signs',
-              'Results': '/results'
-            };
-            const navigate = useNavigate();
-            const route = routeMap[item.name] || item.href || '#';
-
-            return (
-              <button
-                key={item.name}
-                onClick={() => {
-                  if (route && route !== '#') navigate(route);
-                }}
-                className={`nav-item ${isDarkMode ? 'dark' : 'light'}`}
-                style={{ background: 'transparent', border: 'none', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
-              >
-                <item.icon size={18} />
-                <span className="nav-text">{item.name}</span>
-              </button>
-            );
-          })}
+          {navItems.map(item => (
+            <button
+              key={item.key}
+              onClick={() => navigate(item.route)}
+              className={`nav-item ${isDarkMode ? 'dark' : 'light'}`}
+            >
+              <item.icon size={18} />
+              <span className="nav-text">{t(selectedLanguage, item.key)}</span>
+            </button>
+          ))}
         </div>
 
         {/* RIGHT: Actions (Login, Register/Buy or User Menu) */}
@@ -153,30 +137,10 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
           
           {isAuthenticated && user ? (
             /* Logged In User Menu */
-            <div className="user-menu-container" style={{ position: 'relative' }}>
+            <div className="user-menu-container">
               <button 
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 className="user-menu-btn"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 16px',
-                  backgroundColor: '#7e11d6',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '0.95rem',
-                  fontWeight: '600',
-                  transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#6b0fb8';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#7e11d6';
-                }}
               >
                 <User size={18} />
                 <span>{user.firstName} {user.lastName}</span>
@@ -184,70 +148,18 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
               </button>
               
               {isUserMenuOpen && (
-                <div 
-                  className={`user-dropdown ${isDarkMode ? 'dark' : 'light'}`}
-                  style={{
-                    position: 'absolute',
-                    top: '100%',
-                    right: 0,
-                    marginTop: '8px',
-                    backgroundColor: 'white',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '12px',
-                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
-                    minWidth: '220px',
-                    zIndex: 1000,
-                    overflow: 'hidden'
-                  }}
-                >
-                  <div style={{
-                    padding: '16px',
-                    borderBottom: '1px solid #e5e7eb',
-                    backgroundColor: '#f9fafb'
-                  }}>
-                    <p style={{
-                      margin: 0,
-                      fontSize: '0.95rem',
-                      fontWeight: '700',
-                      color: '#111827'
-                    }}>
-                      {user.firstName} {user.lastName}
-                    </p>
-                    <p style={{
-                      margin: '4px 0 0',
-                      fontSize: '0.85rem',
-                      color: '#6b7280'
-                    }}>
-                      {user.email}
-                    </p>
+                <div className={`user-dropdown ${isDarkMode ? 'dark' : 'light'}`}>
+                  <div className={`user-dropdown-header ${isDarkMode ? 'dark' : 'light'}`}>
+                    <p className="user-name">{user.firstName} {user.lastName}</p>
+                    <p className="user-email">{user.email}</p>
                   </div>
                   
                   <button
                     onClick={handleLogout}
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '14px 16px',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontSize: '0.95rem',
-                      color: '#dc2626',
-                      fontWeight: '600',
-                      transition: 'background-color 0.2s',
-                      textAlign: 'left'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#fef2f2';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
+                    className={`logout-btn ${isDarkMode ? 'dark' : 'light'}`}
                   >
                     <LogOut size={18} />
-                    <span>Logout</span>
+                    <span>{t(selectedLanguage, 'auth.logout')}</span>
                   </button>
                 </div>
               )}
@@ -257,11 +169,11 @@ export default function TopNav({ isDarkMode = false, onThemeToggle, onRegisterBu
             <>
               <button onClick={() => { console.log('Register/Buy clicked!'); onRegisterBuyClick(); }} className="register-buy-btn">
                 <UserPlus size={16} />
-                <span>Register / Buy</span>
+                <span>{t(selectedLanguage, 'auth.registerBuy')}</span>
               </button>
               <button onClick={() => { console.log('Login clicked!'); onLoginClick?.(); }} className={`login-btn ${isDarkMode ? 'dark' : 'light'}`}>
                 <LogIn size={16} />
-                <span>Login</span>
+                <span>{t(selectedLanguage, 'auth.login')}</span>
               </button>
             </>
           )}
