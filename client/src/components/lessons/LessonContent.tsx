@@ -62,7 +62,7 @@ const LessonContent: React.FC<LessonContentProps> = ({ page }) => {
             )}
 
             {/* Content Paragraphs */}
-            {section.content.map((paragraph, pIndex) => (
+            {(section.content || []).map((paragraph, pIndex) => (
               <p key={pIndex} style={{
                 fontSize: '1.05rem',
                 lineHeight: '1.7',

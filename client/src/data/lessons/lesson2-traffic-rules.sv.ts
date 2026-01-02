@@ -115,6 +115,36 @@ export const lesson2: Lesson = {
           }
         }
       ]
+    },
+    {
+      id: 4,
+      title: "Ytterligare punkter för svenska rondeller",
+      sections: [
+        {
+          heading: "Viktiga punkter",
+          list: {
+            type: 'bullet',
+            items: [
+              "Använd strålkastare hela tiden, även dagtid, enligt svensk lag.",
+              "Större rondeller kan ha flera körfält, vägmarkeringar visar avfarter.",
+              "Stanna inte i rondellen om det inte är nödvändigt.",
+              "Ge alltid företräde till utryckningsfordon, även i rondellen.",
+              "Vid vinterväglag, räkna med sämre grepp och längre bromssträcka."
+            ]
+          }
+        },
+        {
+          heading: "Viktiga säkerhetstips",
+          list: {
+            type: 'bullet',
+            items: [
+              "Håll låg hastighet vid infart och i rondellen.",
+              "Var extra uppmärksam på gående och cyklister.",
+              "Titta noga åt vänster innan du kör in."
+            ]
+          }
+        }
+      ]
     }
   ]
 };

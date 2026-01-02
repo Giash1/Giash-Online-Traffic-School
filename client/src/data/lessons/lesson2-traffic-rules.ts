@@ -67,6 +67,36 @@ export const lesson2: Lesson = {
           }
         }
       ]
+    },
+    {
+      id: 4,
+      title: "Additional Points for Swedish Roundabouts",
+      sections: [
+        {
+          heading: "Key Points",
+          list: {
+            type: 'bullet',
+            items: [
+              "Use headlights at all times, even during daylight, as required in Sweden.",
+              "Larger roundabouts may have multiple lanes, with road markings guiding exits.",
+              "Do not stop inside the roundabout unless traffic conditions make it necessary.",
+              "Always give priority to emergency vehicles, even if they are inside the roundabout.",
+              "In winter, expect reduced grip. Allow for longer braking distances and drive cautiously."
+            ]
+          }
+        },
+        {
+          heading: "Important Safety Tips",
+          list: {
+            type: 'bullet',
+            items: [
+              "Maintain a low speed when entering and navigating the roundabout.",
+              "Be extra attentive to pedestrians and cyclists.",
+              "Look carefully to the left before entering."
+            ]
+          }
+        }
+      ]
     }
   ]
 };
