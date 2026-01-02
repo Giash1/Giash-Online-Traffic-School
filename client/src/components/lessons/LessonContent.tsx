@@ -1,6 +1,7 @@
 import React from 'react';
 import { LessonPage } from '../../data/lessonData';
 import { CheckCircle } from 'lucide-react';
+import { VideoPlayer } from './VideoPlayer';
 
 interface LessonContentProps {
   page: LessonPage;
@@ -71,6 +72,18 @@ const LessonContent: React.FC<LessonContentProps> = ({ page }) => {
                 {paragraph}
               </p>
             ))}
+
+            {/* Video */}
+            {section.video && (
+              <div style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <VideoPlayer 
+                  src={section.video.src}
+                  caption={section.video.caption}
+                  poster={section.video.poster}
+                  captionPosition="above"
+                />
+              </div>
+            )}
 
             {/* Lists */}
             {section.list && (

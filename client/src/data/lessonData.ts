@@ -7,6 +7,11 @@ export interface LessonSection {
     type: 'bullet' | 'numbered';
     items: string[];
   };
+  video?: {
+    src: string;
+    caption?: string;
+    poster?: string;
+  };
 }
 
 export interface LessonPage {
@@ -32,6 +37,11 @@ import { lesson1 as lesson1_fa } from './lessons/lesson1-introduction.fa';
 import { lesson1 as lesson1_ua } from './lessons/lesson1-introduction.ua';
 import { lesson1 as lesson1_ur } from './lessons/lesson1-introduction.ur';
 
+// Import lesson 2 - Traffic Rules
+import { lesson2 as lesson2_en } from './lessons/lesson2-traffic-rules.en';
+import { lesson2 as lesson2_sv } from './lessons/lesson2-traffic-rules.sv';
+import { lesson2 as lesson2_ban } from './lessons/lesson2-traffic-rules.bn';
+
 // Export the lessons array
 export const lessons: Lesson[] = allLessons;
 
@@ -48,6 +58,14 @@ export const getLocalizedLessons = (language: string): Lesson[] => {
         case 'ur': return lesson1_ur;
         case 'eng': return lesson1_en;
         default: return lesson1_en;
+      }
+    }
+    if (lesson.id === 2) {
+      switch (language) {
+        case 'sv': return lesson2_sv;
+        case 'ban': return lesson2_ban;
+        case 'eng': return lesson2_en;
+        default: return lesson2_en;
       }
     }
     return lesson;
@@ -72,6 +90,14 @@ export const getLessonByIdLocalized = (id: number, language: string): Lesson | u
       case 'ur': return lesson1_ur;
       case 'eng': return lesson1_en;
       default: return lesson1_en;
+    }
+  }
+  if (id === 2) {
+    switch (language) {
+      case 'sv': return lesson2_sv;
+      case 'ban': return lesson2_ban;
+      case 'eng': return lesson2_en;
+      default: return lesson2_en;
     }
   }
   // For other lessons, just return the default (English) for now

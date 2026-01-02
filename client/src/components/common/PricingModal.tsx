@@ -36,10 +36,7 @@ export default function PricingModal({ isOpen, onClose, showLoginDirectly = fals
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>('basic');
 
-  console.log('PricingModal render:', { isOpen, showLoginDirectly, showRegisterForm, showLoginForm });
-
   useEffect(() => {
-    console.log('PricingModal useEffect:', { isOpen, showLoginDirectly });
     if (isOpen && showLoginDirectly) {
       setShowLoginForm(true);
       setShowRegisterForm(false);
@@ -49,17 +46,11 @@ export default function PricingModal({ isOpen, onClose, showLoginDirectly = fals
     }
   }, [isOpen, showLoginDirectly]);
 
-  console.log('🔍 PricingModal render check:', { isOpen, showLoginDirectly, showLoginForm, showRegisterForm });
-
   if (!isOpen) {
-    console.log('PricingModal: not rendering because isOpen is false');
     return null;
   }
 
-  console.log('✅ PricingModal: IS OPEN - will render!');
-
   const handleSelectPlan = (planName: string) => {
-    console.log('Plan selected:', planName);
     setSelectedPlan(planName);
     setShowRegisterForm(true);
   };

@@ -24,6 +24,49 @@ export const lesson2: Lesson = {
           }
         }
       ]
+    },
+    {
+      id: 2,
+      title: "Intersections",
+      sections: [
+        {
+          heading: "Understanding Swedish Intersections",
+          content: [
+            "At Swedish intersections, the main goal is to make meetings between different traffic streams as safe and predictable as possible. Drivers are guided by a clear order of rules: first by any traffic signals, then by signs such as väjningsplikt (yield) and stoppskylt (stop), and finally by the basic priority rules when no control exists. Where no traffic lights, priority signs, or roundabout rules apply, the right‑hand rule governs, meaning that vehicles coming from the right have precedence. Pedestrians and cyclists who are using, or clearly about to use, a marked crossing at an intersection must be given space and time to pass safely, and drivers are expected to adjust their speed in advance so that interaction becomes smooth rather than sudden."
+          ],
+          video: {
+            src: "/intersection.mp4",
+            caption: "Understanding intersections in Sweden",
+            poster: "/road-traffic-thumb.jpg.png"
+          }
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Roundabouts",
+      sections: [
+        {
+          heading: "Roundabouts in Sweden",
+          content: [
+            "A roundabout is a circular intersection where traffic moves counterclockwise around a central island. Traffic in the roundabout has the right of way."
+          ],
+          list: {
+            type: 'bullet',
+            items: [
+              'Yield to vehicles already in the roundabout',
+              'Signal your exit well in advance',
+              'Choose the correct lane in time',
+              'Cyclists may have separate arrangements (bicycle crossings)'
+            ]
+          },
+          video: {
+            src: "/roundabout.mp4",
+            caption: "Navigating a roundabout safely",
+            poster: "/roundabout.png"
+          }
+        }
+      ]
     }
   ]
 };

@@ -74,6 +74,23 @@ export type TranslationKey =
   | 'lesson1.p5.s2.l1'
   | 'lesson1.p5.s2.l2'
   | 'lesson1.p5.s2.l3'
+  // Lesson 2 - Traffic Rules
+  | 'lesson2.p1.title'
+  | 'lesson2.p1.road.title'
+  | 'lesson2.p1.road.desc'
+  | 'lesson2.p1.carriageway.title'
+  | 'lesson2.p1.carriageway.desc'
+  | 'lesson2.p1.lane.title'
+  | 'lesson2.p1.lane.desc'
+  | 'lesson2.p1.hardShoulder.title'
+  | 'lesson2.p1.hardShoulder.desc'
+  | 'lesson2.p1.analogy.title'
+  | 'lesson2.p1.analogy.road'
+  | 'lesson2.p1.analogy.carriageway'
+  | 'lesson2.p1.analogy.lanes'
+  | 'lesson2.p1.analogy.hardShoulder'
+  | 'lesson2.p2.title'
+  | 'lesson2.p2.video.caption'
   | 'footer.contact'
   | 'footer.email'
   | 'footer.location'
@@ -197,7 +214,7 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'welcome.title': 'Welcome to KörStart',
     'welcome.subtitle': 'Your complete guide to passing the Swedish driving license theory test.',
     'welcome.feature1.title': 'Multi-Language Support',
-    'welcome.feature1.desc': 'Learn in Swedish, English, or Bangla. Our platform is designed to break down language barriers, making learning accessible for everyone.',
+    'welcome.feature1.desc': 'Learn in Swedish, English, Bangla, Arabic, Farsi, Ukrainian, or Urdu. Our platform is designed to break down language barriers, making learning accessible for everyone.',
     'welcome.feature2.title': 'Comprehensive Theory',
     'welcome.feature2.desc': 'We cover all chapters of the official Swedish driving license theory book, simplifying complex topics with clear explanations.',
     'welcome.feature3.title': '1000+ Practice Questions',
@@ -232,6 +249,23 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson.previous': 'Previous',
     'lesson.next': 'Next',
     'lesson.completed': 'Completed',
+    // Lesson 2 - Traffic Rules
+    'lesson2.p1.title': 'Basic Road Terminology',
+    'lesson2.p1.road.title': 'Road',
+    'lesson2.p1.road.desc': 'The whole area from property line to property line — includes carriageway, shoulders, verges, ditches, and sidewalks.',
+    'lesson2.p1.carriageway.title': 'Carriageway',
+    'lesson2.p1.carriageway.desc': 'The main part of the road for vehicle traffic; may have one or more.',
+    'lesson2.p1.lane.title': 'Lane',
+    'lesson2.p1.lane.desc': 'A marked part of the carriageway wide enough for one line of vehicles.',
+    'lesson2.p1.hardShoulder.title': 'Hard Shoulder',
+    'lesson2.p1.hardShoulder.desc': 'A paved strip beside the carriageway, used only for emergencies.',
+    'lesson2.p1.analogy.title': 'Visual Analogy',
+    'lesson2.p1.analogy.road': 'Road = the whole sandwich',
+    'lesson2.p1.analogy.carriageway': 'Carriageway = the filling',
+    'lesson2.p1.analogy.lanes': 'Lanes = slices within the filling',
+    'lesson2.p1.analogy.hardShoulder': 'Hard shoulder = the crust on the edge',
+    'lesson2.p2.title': 'Road Width and Positioning',
+    'lesson2.p2.video.caption': 'Understanding road width and vehicle positioning',
   },
   sv: {
     // Lesson 1 page 1
@@ -314,7 +348,7 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'welcome.title': 'Välkommen till KörStart',
     'welcome.subtitle': 'Din kompletta guide för att klara det svenska körkortsteoriprovet.',
     'welcome.feature1.title': 'Flerspråkigt stöd',
-    'welcome.feature1.desc': 'Lär dig på svenska, engelska eller bengali. Vår plattform är utformad för att bryta språkbarriärer och göra lärandet tillgängligt för alla.',
+    'welcome.feature1.desc': 'Lär dig på svenska, engelska, bengali, arabiska, persiska, ukrainska eller urdu. Vår plattform är utformad för att bryta språkbarriärer och göra lärandet tillgängligt för alla.',
     'welcome.feature2.title': 'Omfattande teori',
     'welcome.feature2.desc': 'Vi täcker alla kapitel i den officiella svenska körkortsteoriboken och förenklar komplexa ämnen med tydliga förklaringar.',
     'welcome.feature3.title': '1000+ övningsfrågor',
@@ -348,8 +382,23 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson.pageOf': 'Sida {current} av {total}',
     'lesson.previous': 'Föregående',
     'lesson.next': 'Nästa',
-    'lesson.completed': 'Klar',
-  },
+    'lesson.completed': 'Klar',    // Lesson 2 - Traffic Rules
+    'lesson2.p1.title': 'Grundläggande vägterminologi',
+    'lesson2.p1.road.title': 'Väg',
+    'lesson2.p1.road.desc': 'Hela området från fastighetsgräns till fastighetsgräns — inkluderar körbana, vägren, vägkanter, diken och trottoarer.',
+    'lesson2.p1.carriageway.title': 'Körbana',
+    'lesson2.p1.carriageway.desc': 'Den huvudsakliga delen av vägen för fordonstrafik; kan ha en eller flera.',
+    'lesson2.p1.lane.title': 'Körfält',
+    'lesson2.p1.lane.desc': 'En markerad del av körbanan som är tillräckligt bred för en fil av fordon.',
+    'lesson2.p1.hardShoulder.title': 'Vägren',
+    'lesson2.p1.hardShoulder.desc': 'En asfalterad remsa bredvid körbanan, används endast för nödsituationer.',
+    'lesson2.p1.analogy.title': 'Visuell analogi',
+    'lesson2.p1.analogy.road': 'Väg = hela smörgåsen',
+    'lesson2.p1.analogy.carriageway': 'Körbana = fyllningen',
+    'lesson2.p1.analogy.lanes': 'Körfält = skivor inom fyllningen',
+    'lesson2.p1.analogy.hardShoulder': 'Vägren = skorpan på kanten',
+    'lesson2.p2.title': 'Vägbredd och positionering',
+    'lesson2.p2.video.caption': 'Förståelse för vägbredd och fordonspositionering',  },
   ban: {
     // Lesson 1 page 1
     'lesson1.p1.title': 'শুরু করুন',
@@ -431,7 +480,7 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'welcome.title': 'KörStart-এ স্বাগতম',
     'welcome.subtitle': 'সুইডিশ ড্রাইভিং লাইসেন্স থিওরি পরীক্ষায় উত্তীর্ণ হওয়ার জন্য আপনার সম্পূর্ণ গাইড।',
     'welcome.feature1.title': 'বহুভাষা সমর্থন',
-    'welcome.feature1.desc': 'সুইডিশ, ইংরেজি বা বাংলা ভাষায় শিখুন। আমাদের প্ল্যাটফর্ম ভাষাগত বাধা দূর করতে এবং সবার জন্য শেখাকে সহজ করতে ডিজাইন করা হয়েছে।',
+    'welcome.feature1.desc': 'সুইডিশ, ইংরেজি, বাংলা, আরবি, ফার্সি, ইউক্রেনীয় বা উর্দু ভাষায় শিখুন। আমাদের প্ল্যাটফর্ম ভাষাগত বাধা দূর করতে এবং সবার জন্য শেখাকে সহজ করতে ডিজাইন করা হয়েছে।',
     'welcome.feature2.title': 'বিস্তৃত তত্ত্ব',
     'welcome.feature2.desc': 'আমরা সুইডিশ ড্রাইভিং লাইসেন্সের অফিসিয়াল বইয়ের সব অধ্যায় কভার করি, জটিল বিষয়গুলো সহজভাবে ব্যাখ্যা করি।',
     'welcome.feature3.title': '১০০০+ অনুশীলন প্রশ্ন',
@@ -466,6 +515,23 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson.previous': 'আগের',
     'lesson.next': 'পরের',
     'lesson.completed': 'সম্পন্ন',
+    // Lesson 2 - Traffic Rules
+    'lesson2.p1.title': 'মৌলিক সড়ক পরিভাষা',
+    'lesson2.p1.road.title': 'সড়ক',
+    'lesson2.p1.road.desc': 'সম্পত্তির সীমানা থেকে সম্পত্তির সীমানা পর্যন্ত সম্পূর্ণ এলাকা — যার মধ্যে রয়েছে যানবাহন চলাচলের রাস্তা, কাঁধ, প্রান্ত, খাদ এবং ফুটপাথ।',
+    'lesson2.p1.carriageway.title': 'যানবাহন চলাচলের রাস্তা',
+    'lesson2.p1.carriageway.desc': 'যানবাহন চলাচলের জন্য সড়কের প্রধান অংশ; এক বা একাধিক হতে পারে।',
+    'lesson2.p1.lane.title': 'লেন',
+    'lesson2.p1.lane.desc': 'যানবাহন চলাচলের রাস্তার একটি চিহ্নিত অংশ যা এক লাইন যানবাহনের জন্য যথেষ্ট প্রশস্ত।',
+    'lesson2.p1.hardShoulder.title': 'হার্ড শোল্ডার',
+    'lesson2.p1.hardShoulder.desc': 'যানবাহন চলাচলের রাস্তার পাশে একটি পাকা স্ট্রিপ, শুধুমাত্র জরুরী অবস্থার জন্য ব্যবহৃত হয়।',
+    'lesson2.p1.analogy.title': 'চাক্ষুষ উপমা',
+    'lesson2.p1.analogy.road': 'সড়ক = পুরো স্যান্ডউইচ',
+    'lesson2.p1.analogy.carriageway': 'যানবাহন চলাচলের রাস্তা = ফিলিং',
+    'lesson2.p1.analogy.lanes': 'লেন = ফিলিংয়ের মধ্যে টুকরো',
+    'lesson2.p1.analogy.hardShoulder': 'হার্ড শোল্ডার = প্রান্তের ক্রাস্ট',
+    'lesson2.p2.title': 'সড়কের প্রশস্ততা এবং অবস্থান',
+    'lesson2.p2.video.caption': 'সড়কের প্রশস্ততা এবং যানবাহনের অবস্থান বোঝা',
   },
   ar: {
     // Lesson 1 page 1
@@ -548,7 +614,7 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'welcome.title': 'مرحبًا بك في KörStart',
     'welcome.subtitle': 'دليلك الكامل لاجتياز اختبار رخصة القيادة السويدية النظري.',
     'welcome.feature1.title': 'دعم متعدد اللغات',
-    'welcome.feature1.desc': 'تعلم باللغة السويدية أو الإنجليزية أو البنغالية. منصتنا مصممة لكسر حواجز اللغة وجعل التعلم متاحًا للجميع.',
+    'welcome.feature1.desc': 'تعلم باللغة السويدية، الإنجليزية، البنغالية، العربية، الفارسية، الأوكرانية، أو الأردية. منصتنا مصممة لكسر حواجز اللغة وجعل التعلم متاحًا للجميع.',
     'welcome.feature2.title': 'نظرية شاملة',
     'welcome.feature2.desc': 'نغطي جميع فصول كتاب نظرية رخصة القيادة السويدية الرسمي، ونبسط الموضوعات المعقدة بتفسيرات واضحة.',
     'welcome.feature3.title': '1000+ سؤال تدريبي',
@@ -583,6 +649,23 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson.previous': 'السابق',
     'lesson.next': 'التالي',
     'lesson.completed': 'مكتمل',
+    // Lesson 2 - Traffic Rules
+    'lesson2.p1.title': 'مصطلحات الطريق الأساسية',
+    'lesson2.p1.road.title': 'الطريق',
+    'lesson2.p1.road.desc': 'المنطقة بأكملها من حد الملكية إلى حد الملكية — تشمل المسار، الأكتاف، الحواف، الخنادق، والأرصفة.',
+    'lesson2.p1.carriageway.title': 'المسار',
+    'lesson2.p1.carriageway.desc': 'الجزء الرئيسي من الطريق لحركة المركبات؛ قد يكون واحداً أو أكثر.',
+    'lesson2.p1.lane.title': 'المسرب',
+    'lesson2.p1.lane.desc': 'جزء محدد من المسار بعرض كافٍ لصف واحد من المركبات.',
+    'lesson2.p1.hardShoulder.title': 'الكتف الصلب',
+    'lesson2.p1.hardShoulder.desc': 'شريط معبد بجانب المسار، يستخدم للطوارئ فقط.',
+    'lesson2.p1.analogy.title': 'تشبيه بصري',
+    'lesson2.p1.analogy.road': 'الطريق = الساندويتش بأكمله',
+    'lesson2.p1.analogy.carriageway': 'المسار = الحشوة',
+    'lesson2.p1.analogy.lanes': 'المسارب = شرائح داخل الحشوة',
+    'lesson2.p1.analogy.hardShoulder': 'الكتف الصلب = القشرة على الحافة',
+    'lesson2.p2.title': 'عرض الطريق والموقع',
+    'lesson2.p2.video.caption': 'فهم عرض الطريق وموقع المركبة',
   },
   fa: {
     // Lesson 1 page 1
@@ -641,6 +724,23 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson1.p5.s2.l1': '---',
     'lesson1.p5.s2.l2': '---',
     'lesson1.p5.s2.l3': '---',
+    // Lesson 2 - Traffic Rules (required keys)
+    'lesson2.p1.title': '---',
+    'lesson2.p1.road.title': '---',
+    'lesson2.p1.road.desc': '---',
+    'lesson2.p1.carriageway.title': '---',
+    'lesson2.p1.carriageway.desc': '---',
+    'lesson2.p1.lane.title': '---',
+    'lesson2.p1.lane.desc': '---',
+    'lesson2.p1.hardShoulder.title': '---',
+    'lesson2.p1.hardShoulder.desc': '---',
+    'lesson2.p1.analogy.title': '---',
+    'lesson2.p1.analogy.road': '---',
+    'lesson2.p1.analogy.carriageway': '---',
+    'lesson2.p1.analogy.lanes': '---',
+    'lesson2.p1.analogy.hardShoulder': '---',
+    'lesson2.p2.title': '---',
+    'lesson2.p2.video.caption': '---',
     // Footer and general
     'footer.contact': 'تماس: گیاس الدین',
     'footer.email': 'ایمیل: giashsw@outlook.com',
@@ -758,6 +858,23 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson1.p5.s2.l1': '---',
     'lesson1.p5.s2.l2': '---',
     'lesson1.p5.s2.l3': '---',
+    // Lesson 2 - Traffic Rules
+  'lesson2.p1.title': '---',
+  'lesson2.p1.road.title': '---',
+  'lesson2.p1.road.desc': '---',
+  'lesson2.p1.carriageway.title': '---',
+  'lesson2.p1.carriageway.desc': '---',
+  'lesson2.p1.lane.title': '---',
+  'lesson2.p1.lane.desc': '---',
+  'lesson2.p1.hardShoulder.title': '---',
+  'lesson2.p1.hardShoulder.desc': '---',
+  'lesson2.p1.analogy.title': '---',
+  'lesson2.p1.analogy.road': '---',
+  'lesson2.p1.analogy.carriageway': '---',
+  'lesson2.p1.analogy.lanes': '---',
+  'lesson2.p1.analogy.hardShoulder': '---',
+    'lesson2.p2.title': '---',
+  'lesson2.p2.video.caption': '---',
     // Footer and general
     'footer.contact': 'Контакт: Гіаш Уддін',
     'footer.email': 'Електронна пошта: giashsw@outlook.com',
@@ -875,6 +992,22 @@ const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
     'lesson1.p5.s2.l1': '---',
     'lesson1.p5.s2.l2': '---',
     'lesson1.p5.s2.l3': '---',
+    'lesson2.p1.title': '---',
+  'lesson2.p1.road.title': '---',
+  'lesson2.p1.road.desc': '---',
+  'lesson2.p1.carriageway.title': '---',
+  'lesson2.p1.carriageway.desc': '---',
+  'lesson2.p1.lane.title': '---',
+  'lesson2.p1.lane.desc': '---',
+  'lesson2.p1.hardShoulder.title': '---',
+  'lesson2.p1.hardShoulder.desc': '---',
+  'lesson2.p1.analogy.title': '---',
+  'lesson2.p1.analogy.road': '---',
+  'lesson2.p1.analogy.carriageway': '---',
+  'lesson2.p1.analogy.lanes': '---',
+  'lesson2.p1.analogy.hardShoulder': '---',
+  'lesson2.p2.title': '---',
+  'lesson2.p2.video.caption': '---',
     // Footer and general
     'footer.contact': 'رابطہ: گیاس الدین',
     'footer.email': 'ای میل: giashsw@outlook.com',
